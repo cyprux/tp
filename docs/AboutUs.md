@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Cody
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/codcod30.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/codcod30)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Data
 
 ### Johnny Doe
 
@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities:
 
 ### Jean Doe
 
