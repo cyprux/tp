@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+/**
+ * Represents a maintenance task that needs to be performed on the system.
+ */
 public class MaintenanceTask {
     private final String description;
 
