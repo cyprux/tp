@@ -6,10 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACILITY;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.MaintenanceTask;
 
 /**
@@ -63,10 +66,19 @@ public class AddtCommand extends Command {
         validateContractorExists(model);
         validateNoDuplicate(model);
 
-        MaintenanceTask task = new MaintenanceTask(facility, date, contractorIndex.getOneBased());
+        Person contractor = model.getFilteredPersonList().get(contractorIndex.getZeroBased());
+        Set<Tag> contractorTags = contractor.getTags();
+
+        MaintenanceTask task = new MaintenanceTask(facility, date, contractorIndex.getOneBased(), contractorTags);
         model.getMaintenanceTaskList().addTask(task);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task));
+        String tagsString = contractorTags.stream()
+                .map(tag -> tag.tagName)
+                .collect(java.util.stream.Collectors.joining(", "));
+        String taskDisplay = facility + " on " + date
+                + " (Contractor: " + contractor.getName().fullName
+                + " [" + tagsString + "])";
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskDisplay));
     }
 
     /**

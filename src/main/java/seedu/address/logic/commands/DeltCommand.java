@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.MaintenanceTask;
 import seedu.address.model.task.MaintenanceTaskList;
 
@@ -45,7 +46,16 @@ public class DeltCommand extends Command {
 
         MaintenanceTask taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         taskList.removeTask(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
+
+        Person contractor = model.getFilteredPersonList()
+                .get(taskToDelete.getContractorIndex() - 1);
+        String tagsString = taskToDelete.getTags().stream()
+                .map(tag -> tag.tagName)
+                .collect(java.util.stream.Collectors.joining(", "));
+        String taskDisplay = taskToDelete.getFacility() + " on " + taskToDelete.getDate()
+                + " (Contractor: " + contractor.getName().fullName
+                + " [" + tagsString + "])";
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskDisplay));
     }
 
     @Override

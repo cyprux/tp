@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.MaintenanceTask;
 import seedu.address.model.task.MaintenanceTaskList;
 
@@ -22,10 +23,24 @@ public class ListtCommand extends Command {
             return new CommandResult(MESSAGE_NO_TASKS);
         }
         StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + "\n");
+
         List<MaintenanceTask> tasks = taskList.getTasks();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+            MaintenanceTask task = tasks.get(i);
+            Person contractor = model.getFilteredPersonList()
+                    .get(task.getContractorIndex() - 1);
+            String contractorName = contractor.getName().fullName;
+            String tagsString = task.getTags().stream()
+                    .map(tag -> tag.tagName)
+                    .collect(java.util.stream.Collectors.joining(", "));
+
+            sb.append(i + 1).append(". ")
+                    .append(task.getFacility())
+                    .append(" on ").append(task.getDate())
+                    .append(" (Contractor: ").append(contractorName)
+                    .append(" [").append(tagsString).append("])\n");
         }
         return new CommandResult(sb.toString());
     }
 }
+
