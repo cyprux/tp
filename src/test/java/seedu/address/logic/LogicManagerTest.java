@@ -50,7 +50,7 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = 
+        JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonTaskListStorage taskListStorage =
                 new JsonTaskListStorage(temporaryFolder.resolve("tasklist.json"));
@@ -167,7 +167,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        
+
         JsonTaskListStorage taskListStorage =
             new JsonTaskListStorage(temporaryFolder.resolve("ExceptionTaskList.json")) {
                 @Override
