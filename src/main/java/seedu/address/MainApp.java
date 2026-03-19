@@ -21,12 +21,15 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.task.MaintenanceTaskList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTaskListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TaskListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -58,7 +61,10 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TaskListStorage taskListStorage = new JsonTaskListStorage(userPrefs.getAddressBookFilePath()
+                                            .resolveSibling("tasklist.json"));
+
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, taskListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -90,7 +96,27 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        ModelManager modelManager = new ModelManager(initialData, userPrefs);
+        loadTaskList(storage, modelManager);
+        return modelManager;
+    }
+
+    /**
+     * Loads the saved {@link MaintenanceTaskList} from storage into the given model.
+     * If the file is not found or fails to load, the model starts with an empty task list.
+     *
+     * @param storage      The storage component to read from.
+     * @param modelManager The model to populate with loaded tasks.
+     */
+    private void loadTaskList(Storage storage, ModelManager modelManager) {
+        try {
+            Optional<MaintenanceTaskList> taskListOptional = storage.readTaskList();
+            taskListOptional.ifPresent(loaded -> {
+                loaded.getTasks().forEach(modelManager.getMaintenanceTaskList()::addTask);
+            });
+        } catch (DataLoadingException e) {
+            logger.warning("Task list data could not be loaded. Starting with an empty task list.");
+        }
     }
 
     private void initLogging(Config config) {

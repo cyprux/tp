@@ -63,4 +63,35 @@ public class MaintenanceTask {
         return facility + " on " + date
                 + " (Contractor #" + contractorIndex + " [" + tagsString + "])";
     }
+
+    /**
+     * Returns true if both maintenance tasks have the same facility, date,
+     * contractor index, and tags.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MaintenanceTask)) {
+            return false;
+        }
+
+        MaintenanceTask otherTask = (MaintenanceTask) other;
+        return facility.equals(otherTask.facility)
+                && date.equals(otherTask.date)
+                && contractorIndex == otherTask.contractorIndex
+                && tags.equals(otherTask.tags);
+    }
+
+    /**
+     * Returns the hash code of this maintenance task based on its identity fields.
+     */
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(facility, date, contractorIndex, tags);
+    }
+
 }
