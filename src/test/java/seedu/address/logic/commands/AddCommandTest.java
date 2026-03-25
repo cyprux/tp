@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.MaintenanceTask;
 import seedu.address.model.task.MaintenanceTaskList;
 import seedu.address.testutil.PersonBuilder;
 
@@ -156,6 +157,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
+        public ObservableList<MaintenanceTask> getFilteredMaintenanceTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredMaintenanceTaskList(Predicate<MaintenanceTask> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
