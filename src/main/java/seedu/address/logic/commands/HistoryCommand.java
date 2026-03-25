@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 import seedu.address.model.task.FacilityContainsKeywords;
 
+/**
+ * Lists all maintenance tasks for a specific facility.
+ */
 public class HistoryCommand extends Command {
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all tasks for a facility. "
@@ -13,6 +17,9 @@ public class HistoryCommand extends Command {
     private final FacilityContainsKeywords predicate;
     private final String facilityName;
 
+    /**
+     * @param facilityName The name of the facility to filter by.
+     */
     public HistoryCommand(String facilityName) {
         this.facilityName = facilityName;
         this.predicate = new FacilityContainsKeywords(facilityName);
