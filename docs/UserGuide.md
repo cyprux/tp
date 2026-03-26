@@ -80,7 +80,7 @@ EstateContacts is a **desktop app for managing contacts, optimized for use via a
 
 ---
 
-### Adding a contractor : `add`
+### Adding a contractor : `addc`
 
 Adds a contractor to the address book.
 
@@ -119,7 +119,7 @@ Examples:
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a contractor : `delete`
+### Deleting a contractor : `delc`
 
 Deletes the specified contractor from the address book.
 
@@ -171,7 +171,7 @@ Sorts the maintenance task list by date (ascending).
 
 Format: `sortt`
 
-### Deleting a task : `deletet`
+### Deleting a task : `delt`
 
 Deletes the specified task from the address book.
 
