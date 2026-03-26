@@ -77,7 +77,8 @@ public class AddressBookParser {
             return new DeltCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            boolean isConfirmed = arguments.trim().equalsIgnoreCase(ClearCommand.CONFIRMATION_KEYWORD);
+            return new ClearCommand(isConfirmed);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
