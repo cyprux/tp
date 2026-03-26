@@ -21,6 +21,11 @@ Class Phone
 Class Service
 Class Tag
 
+Class MaintenanceTask {
+    -description: String
+    -date: LocalDate
+}
+
 Class I #FFFFFF
 }
 
@@ -36,6 +41,7 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+AddressBook *--> "*" MaintenanceTask
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
