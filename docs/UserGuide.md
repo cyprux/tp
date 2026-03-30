@@ -101,16 +101,15 @@ Shows a list of all contractors in the address book.
 
 Format: `listc`
 
-### Locating contractors by name : `findc`
+### Locating contractors by name or service : `findc`
 
-Finds contractors whose names contain any of the given keywords.
+Finds contractors whose names or service contain any of the given keywords.
 
-Format: `findc KEYWORD [MORE_KEYWORDS]`
+Format: `findc KEYWORD [MORE_KEYWORDS] or findc s/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only exact words will be matched e.g. `Han` will not match `Hans`
 * Contractors matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -252,7 +251,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delc INDEX`<br> e.g., `delete 3`
 **Edit**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG]…​`
-**Find**   | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc James Jake`
+**Find**   | `findc KEYWORD [s/SERVICE] [MORE_KEYWORDS]`<br> e.g., `findc James Jake`
 **List**   | `listc`
 **Sort**   | `sortt`
 **Help**   | `help`
