@@ -67,7 +67,7 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <Label text="History" styleClass="label-bright" />
+            <Label text="Command History" styleClass="label-bright" />
             <StackPane fx:id="commandHistoryPlaceholder" VBox.vgrow="ALWAYS" minWidth="0"/>
           </VBox>
         </SplitPane>
