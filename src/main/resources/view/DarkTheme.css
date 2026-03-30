@@ -4,28 +4,28 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
+    -fx-font-size: 13pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
+    -fx-font-size: 13pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 40pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 13pt;
     -fx-font-family: "Segoe UI Semibold";
 }
 
@@ -65,7 +65,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 25pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -122,13 +122,13 @@
 
 .cell_big_label {
     -fx-font-family: "Courier New";
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-text-fill: #00ff00;
 }
 
 .cell_small_label {
     -fx-font-family: "Courier New";
-    -fx-font-size: 12px;
+    -fx-font-size: 15px;
     -fx-text-fill: #aaaaaa;
 }
 
@@ -149,7 +149,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Courier New";
-    -fx-font-size: 11pt;
+    -fx-font-size: 13pt;
     -fx-text-fill: #00ff00;
 }
 
@@ -197,7 +197,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 16pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -265,7 +265,7 @@
 }
 
 .dialog-pane > *.label.content {
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
@@ -275,7 +275,7 @@
 }
 
 .dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
@@ -313,7 +313,7 @@
 }
 
 #commandTypeLabel {
-    -fx-font-size: 11px;
+    -fx-font-size: 13px;
     -fx-text-fill: #F70D1A;
 }
 
@@ -324,7 +324,7 @@
     -fx-border-width: 1;
     -fx-border-insets: 0;
     -fx-font-family: "Courier New";
-    -fx-font-size: 12pt;
+    -fx-font-size: 14pt;
     -fx-text-fill: #00ff00;
     -fx-prompt-text-fill: #555555;
 }
@@ -349,7 +349,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 13;
 }
 
 #commandHistoryPlaceholder {
@@ -377,3 +377,76 @@
 .list-cell:filled:odd {
     -fx-background-color: #111111;
 }
+
+.execute-button {
+    -fx-padding: 5 15 5 15; /* Top, Right, Bottom, Left */
+    -fx-border-color: #00ff00;
+    -fx-border-width: 1;
+    -fx-background-color: #0d0d0d;
+    -fx-text-fill: #00ff00;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+}
+
+.execute-button:hover {
+    -fx-background-color: #00ff00;
+    -fx-text-fill: black;
+}
+
+.cell_small_label {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 13px;
+    -fx-text-fill: #aaaaaa;
+    -fx-wrap-text: true; /* Allows text to drop to the next line if too narrow */
+}
+
+.cell_big_label {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 15px;
+    -fx-text-fill: #00ff00;
+    -fx-wrap-text: true;
+}
+
+#commandHistoryPlaceholder .list-view {
+    -fx-min-width: 0;
+    -fx-pref-width: 100; /* Low pref width allows the divider to stay tight */
+    -fx-hbar-policy: never; /* Prevents scrollbar from pushing width out */
+}
+
+#commandHistoryPlaceholder .list-cell {
+    -fx-min-width: 0;
+    -fx-text-overrun: ellipsis;
+    -fx-padding: 2 5;
+}
+
+/* Ensure the label doesn't force a minimum width */
+.label-bright {
+    -fx-min-width: 0;
+}
+
+#resultDisplayPlaceholder .result-display {
+    -fx-text-fill: #00ff00;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 15px;
+}
+
+##commandHistoryPlaceholder .list-view {
+     -fx-min-width: 0;
+     -fx-hbar-policy: never; /* Prevent horizontal scrollbar in narrow sidebar */
+ }
+
+ #commandHistoryPlaceholder .list-cell {
+     -fx-text-overrun: ellipsis; /* Adds "..." if the command is too long */
+     -fx-font-size: 13px; /* Slightly smaller font for a narrow sidebar */
+     -fx-padding: 3 8;
+ }
+
+/* Scrollbar styling for a cleaner look */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #333333;
+    -fx-background-radius: 5;
+}
+

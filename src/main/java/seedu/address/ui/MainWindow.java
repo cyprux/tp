@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -58,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane mainSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -134,6 +138,8 @@ public class MainWindow extends UiPart<Stage> {
         ListView<String> commandHistoryView = new ListView<>();
         commandHistoryView.setItems(commandHistory);
         commandHistoryPlaceholder.getChildren().add(commandHistoryView);
+
+        mainSplitPane.setDividerPositions(0.82);
     }
 
     /**
@@ -190,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            commandHistory.add(0, commandText);
+            commandHistory.add(0, "> " + commandText);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
