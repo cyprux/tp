@@ -66,13 +66,23 @@ public class ReportCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(MESSAGE_SUCCESS, yearMonth, filteredTasks.size()));
 
+        List<Person> allPersons = model.getAddressBook().getPersonList();
+
         int contractorNumber = 1;
         for (Map.Entry<Integer, List<MaintenanceTask>> entry : tasksByContractor.entrySet()) {
             int contractorIndex = entry.getKey();
             List<MaintenanceTask> tasks = entry.getValue();
 
             // Look up contractor details
-            Person contractor = model.getFilteredPersonList().get(contractorIndex - 1);
+            int idx = contractorIndex - 1;
+            if (idx < 0 || idx >= allPersons.size()) {
+                sb.append(contractorNumber).append(". [Contractor #").append(contractorIndex)
+                        .append(" no longer exists] | Tasks: ").append(tasks.size()).append("\n");
+                contractorNumber++;
+                continue;
+            }
+
+            Person contractor = allPersons.get(idx);
             String contractorName = contractor.getName().fullName;
             String service = contractor.getService().toString();
             String tagsString = contractor.getTags().stream()
