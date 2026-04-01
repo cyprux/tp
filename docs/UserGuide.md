@@ -128,6 +128,12 @@ Format: `delc INDEX`
 * The index refers to the index number shown in the displayed contractor list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="warning" seamless>
+
+**Note:** Deleting a contractor will **not** delete their associated maintenance tasks. Any tasks previously assigned to the deleted contractor will still appear in the task list, but the contractor will be shown as `Unknown (deleted)`. It is recommended to delete associated tasks via `delt` before deleting a contractor.
+
+</box>
+
 Examples:
 * `listc` followed by `delc 2` deletes the 2nd contractor in the address book.
 * `findc Betsy` followed by `delc 1` deletes the 1st contractor in the results of the `findc` command.

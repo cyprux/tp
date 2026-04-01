@@ -82,12 +82,25 @@ public class ReportCommand extends Command {
                 continue;
             }
 
-            Person contractor = allPersons.get(idx);
-            String contractorName = contractor.getName().fullName;
-            String service = contractor.getService().toString();
-            String tagsString = contractor.getTags().stream()
-                    .map(tag -> tag.tagName)
-                    .collect(Collectors.joining(", "));
+            int contractorIdx = contractorIndex - 1;
+            List<Person> personList = model.getFilteredPersonList();
+
+            String contractorName;
+            String service;
+            String tagsString;
+
+            if (contractorIdx < personList.size()) {
+                Person contractor = personList.get(contractorIdx);
+                contractorName = contractor.getName().fullName;
+                service = contractor.getService().toString();
+                tagsString = contractor.getTags().stream()
+                        .map(tag -> tag.tagName)
+                        .collect(Collectors.joining(", "));
+            } else {
+                contractorName = "Unknown (deleted)";
+                service = "Unknown";
+                tagsString = "";
+            }
 
             sb.append(contractorNumber).append(". ")
                     .append(contractorName)

@@ -47,14 +47,27 @@ public class DeltCommand extends Command {
         MaintenanceTask taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         taskList.removeTask(targetIndex.getZeroBased());
 
-        Person contractor = model.getFilteredPersonList()
-                .get(taskToDelete.getContractorIndex() - 1);
+        int contractorIdx = taskToDelete.getContractorIndex() - 1;
+        List<Person> personList = model.getFilteredPersonList();
+
+        String contractorName;
+        String service;
         String tagsString = taskToDelete.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(java.util.stream.Collectors.joining(", "));
+
+        if (contractorIdx < personList.size()) {
+            Person contractor = personList.get(contractorIdx);
+            contractorName = contractor.getName().fullName;
+            service = contractor.getService().toString();
+        } else {
+            contractorName = "Unknown (deleted)";
+            service = "Unknown";
+        }
+
         String taskDisplay = taskToDelete.getFacility() + " on " + taskToDelete.getDate()
-                + " (Contractor: " + contractor.getName().fullName
-                + " | Service: " + taskToDelete.getContractorService()
+                + " (Contractor: " + contractorName
+                + " | Service: " + service
                 + " | Tags: [" + tagsString + "])";
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskDisplay));
     }

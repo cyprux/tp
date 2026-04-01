@@ -26,23 +26,35 @@ public class ListtCommand extends Command {
         StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + "\n");
 
         List<MaintenanceTask> tasks = taskList.getTasks();
+        List<Person> personList = model.getFilteredPersonList();
+
         for (int i = 0; i < tasks.size(); i++) {
             MaintenanceTask task = tasks.get(i);
-            assert task.getContractorIndex() - 1 < model.getFilteredPersonList().size()
-                    : "Contractor index should be within person list size";
-            Person contractor = model.getFilteredPersonList()
-                    .get(task.getContractorIndex() - 1);
-            String contractorName = contractor.getName().fullName;
-            String tagsString = task.getTags().stream()
-                    .map(tag -> tag.tagName)
-                    .collect(java.util.stream.Collectors.joining(", "));
+            int contractorIdx = task.getContractorIndex() - 1;
+
+            String contractorName;
+            String tagsString;
+            String service;
+
+            if (contractorIdx < personList.size()) {
+                Person contractor = personList.get(contractorIdx);
+                contractorName = contractor.getName().fullName;
+                service = contractor.getService().toString();
+                tagsString = task.getTags().stream()
+                        .map(tag -> tag.tagName)
+                        .collect(java.util.stream.Collectors.joining(", "));
+            } else {
+                contractorName = "Unknown (deleted)";
+                service = "Unknown";
+                tagsString = "";
+            }
 
             sb.append(i + 1).append(". ")
                     .append(task.isCompleted() ? "[DONE] " : "[PENDING] ")
                     .append(task.getFacility())
                     .append(" on ").append(task.getDate())
                     .append(" (Contractor: ").append(contractorName)
-                    .append(" | Service: ").append(task.getContractorService())
+                    .append(" | Service: ").append(service)
                     .append(" | Tags: [").append(tagsString).append("])\n");
         }
         return new CommandResult(sb.toString());
