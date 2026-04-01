@@ -45,6 +45,12 @@ public class DeltCommand extends Command {
         }
 
         MaintenanceTask taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        if (taskToDelete.isCompleted()) {
+            throw new CommandException(
+                    "Cannot delete a completed task. Completed tasks are kept for reporting.");
+        }
+
         taskList.removeTask(targetIndex.getZeroBased());
 
         int contractorIdx = taskToDelete.getContractorIndex() - 1;
